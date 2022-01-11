@@ -23,7 +23,6 @@
         <property name="ContentBasedDeduplication" type="bool" />
         <property name="DeduplicationScope" type="string" />
         <property name="FifoThroughputLimit" type="string" />
-
     </transfer>
     
     <transfer name="SqsRedrivePolicy">
@@ -40,7 +39,7 @@
     </transfer>
 
     <transfer name="SqsSendMessageArgs">
-        <property name="QueueName" type="string" />
+        <property name="QueueUrl" type="string" />
         <property name="MessageBody" type="string" />
         <property name="DelaySeconds" type="int" />
         <property name="MessageDeduplicationId" type="string" />
@@ -67,12 +66,26 @@
     <transfer name="SqsChangeMessageVisibilityArgs">
         <property name="QueueUrl" type="string" />
         <property name="ReceiptHandle" type="string" />
-        <property name="VisibilityTimeout" type="string" />
+        <property name="VisibilityTimeout" type="int" />
     </transfer>
     
     <transfer name="SqsGetQueueAttributesArgs">
         <property name="AttributeNames" type="string[]" />
         <property name="QueueUrl" type="string" />
+    </transfer>
+
+    <transfer name="SqsSendMessageBatchArgs">
+        <property name="QueueUrl" type="string" />
+        <property name="Entries" type="SqsSendMessageBatchEntry[]" singular="Entry" />
+    </transfer>
+
+    <transfer name="SqsSendMessageBatchEntry">
+        <property name="MessageBody" type="string" />
+        <property name="DelaySeconds" type="int" />
+        <property name="MessageDeduplicationId" type="string" />
+        <property name="MessageGroupId" type="string" />
+        <property name="MessageAttributes" type="string[]" />
+        <property name="MessageSystemAttributes" type="string[]" />
     </transfer>
 
 </transfers>

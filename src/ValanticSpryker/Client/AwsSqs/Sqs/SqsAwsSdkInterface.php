@@ -11,6 +11,8 @@ use Generated\Shared\Transfer\SqsGetQueueAttributesArgsTransfer;
 use Generated\Shared\Transfer\SqsPurgeQueueArgsTransfer;
 use Generated\Shared\Transfer\SqsReceiveMessageArgsTransfer;
 use Generated\Shared\Transfer\SqsSendMessageArgsTransfer;
+use Generated\Shared\Transfer\SqsSendMessageBatchArgsTransfer;
+use GuzzleHttp\Promise\PromiseInterface;
 
 interface SqsAwsSdkInterface
 {
@@ -41,6 +43,20 @@ interface SqsAwsSdkInterface
      * @return \Aws\Result
      */
     public function sendMessage(SqsSendMessageArgsTransfer $sqsSendMessageArgsTransfer): Result;
+
+    /**
+     * @param \Generated\Shared\Transfer\SqsSendMessageArgsTransfer $sqsSendMessageArgsTransfer
+     *
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function sendMessageAsync(SqsSendMessageArgsTransfer $sqsSendMessageArgsTransfer): PromiseInterface;
+
+    /**
+     * @param \Generated\Shared\Transfer\SqsSendMessageBatchArgsTransfer $sqsSendMessageBatchArgsTransfer
+     *
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function sendMessageBatchAsync(SqsSendMessageBatchArgsTransfer $sqsSendMessageBatchArgsTransfer): PromiseInterface;
 
     /**
      * @param \Generated\Shared\Transfer\SqsReceiveMessageArgsTransfer $sqsReceiveMessageArgsTransfer

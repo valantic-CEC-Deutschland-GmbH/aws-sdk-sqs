@@ -11,6 +11,8 @@ use Generated\Shared\Transfer\SqsGetQueueAttributesArgsTransfer;
 use Generated\Shared\Transfer\SqsPurgeQueueArgsTransfer;
 use Generated\Shared\Transfer\SqsReceiveMessageArgsTransfer;
 use Generated\Shared\Transfer\SqsSendMessageArgsTransfer;
+use Generated\Shared\Transfer\SqsSendMessageBatchArgsTransfer;
+use GuzzleHttp\Promise\PromiseInterface;
 use Spryker\Client\Kernel\AbstractClient;
 
 /**
@@ -64,6 +66,30 @@ class AwsSqsClient extends AbstractClient implements AwsSqsClientInterface
         return $this->getFactory()
             ->createSqsAwsSdk()
             ->sendMessage($sqsSendMessageArgsTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\SqsSendMessageArgsTransfer $sqsSendMessageArgsTransfer
+     *
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function sendMessageAsync(SqsSendMessageArgsTransfer $sqsSendMessageArgsTransfer): PromiseInterface
+    {
+        return $this->getFactory()
+            ->createSqsAwsSdk()
+            ->sendMessageAsync($sqsSendMessageArgsTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\SqsSendMessageBatchArgsTransfer $sqsSendMessageBatchArgsTransfer
+     *
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function sendMessageBatchAsync(SqsSendMessageBatchArgsTransfer $sqsSendMessageBatchArgsTransfer): PromiseInterface
+    {
+        return $this->getFactory()
+            ->createSqsAwsSdk()
+            ->sendMessageBatchAsync($sqsSendMessageBatchArgsTransfer);
     }
 
     /**

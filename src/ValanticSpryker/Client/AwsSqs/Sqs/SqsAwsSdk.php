@@ -12,6 +12,8 @@ use Generated\Shared\Transfer\SqsGetQueueAttributesArgsTransfer;
 use Generated\Shared\Transfer\SqsPurgeQueueArgsTransfer;
 use Generated\Shared\Transfer\SqsReceiveMessageArgsTransfer;
 use Generated\Shared\Transfer\SqsSendMessageArgsTransfer;
+use Generated\Shared\Transfer\SqsSendMessageBatchArgsTransfer;
+use GuzzleHttp\Promise\PromiseInterface;
 
 class SqsAwsSdk implements SqsAwsSdkInterface
 {
@@ -67,6 +69,28 @@ class SqsAwsSdk implements SqsAwsSdkInterface
     {
         return $this->sqsClient
             ->sendMessage($sqsSendMessageArgsTransfer->toArray());
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\SqsSendMessageArgsTransfer $sqsSendMessageArgsTransfer
+     *
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function sendMessageAsync(SqsSendMessageArgsTransfer $sqsSendMessageArgsTransfer): PromiseInterface
+    {
+        return $this->sqsClient
+            ->sendMessageAsync($sqsSendMessageArgsTransfer->toArray());
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\SqsSendMessageBatchArgsTransfer $sqsSendMessageBatchArgsTransfer
+     *
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function sendMessageBatchAsync(SqsSendMessageBatchArgsTransfer $sqsSendMessageBatchArgsTransfer): PromiseInterface
+    {
+        return $this->sqsClient
+            ->sendMessageBatchAsync($sqsSendMessageBatchArgsTransfer->toArray());
     }
 
     /**

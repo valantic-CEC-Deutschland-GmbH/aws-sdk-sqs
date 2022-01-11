@@ -80,6 +80,7 @@
     </transfer>
 
     <transfer name="SqsSendMessageBatchEntry">
+        <property name="Id" type="string" />
         <property name="MessageBody" type="string" />
         <property name="DelaySeconds" type="int" />
         <property name="MessageDeduplicationId" type="string" />

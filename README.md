@@ -11,10 +11,10 @@ composer config repositories.gitlab.nxs360.com/461 '{"type": "composer", "url": 
 
 ### Install package
 ```
-composer req valantic-spryker/sqs
+composer req valantic-spryker/aws-sqs
 ```
 
-### Update your shared config for AWS client
+### Update your shared config
 ```
 $config[AwsSqsConstants::AWS_SQS_CONFIG_PARAM_REGION] = 'us-east-1';
 $config[AwsSqsConstants::AWS_SQS_CONFIG_PARAM_VERSION] = 'latest';

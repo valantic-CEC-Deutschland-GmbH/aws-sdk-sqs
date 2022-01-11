@@ -20,7 +20,7 @@ Go to Gitlab and create a personal access token. Then create an **auth.json** fi
 composer config gitlab-token.gitlab.nxs360.com <personal_access_token>
 ```
 
-Make sure to add **auth.json** to yout **.gitigonore**.
+Make sure to add **auth.json** to yout **.gitignore**.
 
 ### Install package
 ```

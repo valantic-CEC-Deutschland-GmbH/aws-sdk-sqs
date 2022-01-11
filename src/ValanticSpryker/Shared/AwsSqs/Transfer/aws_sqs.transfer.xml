@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="SqsCreateQueueArgs">
+        <property name="QueueName" type="string" />
+        <property name="Attributes" type="SqsCreateQueueArgsAttributes" />
+        <property name="tags" type="string[]" />
+    </transfer>
+    
+    <transfer name="SqsCreateQueueArgsAttributes">
+        <property name="DelaySeconds" type="int" />
+        <property name="MaximumMessageSize" type="int" />
+        <property name="MessageRetentionPeriod" type="int" />
+        <property name="ReceiveMessageWaitTimeSeconds" type="int" />
+        <property name="VisibilityTimeout" type="int" />
+        <property name="RedrivePolicy" type="SqsRedrivePolicy" />
+        <property name="KmsMasterKeyId" type="string" />
+        <property name="KmsDataKeyReusePeriodSeconds" type="int" />
+        <property name="SqsManagedSseEnabled" type="bool" />
+        <property name="FifoQueue" type="bool" />
+        <property name="ContentBasedDeduplication" type="bool" />
+        <property name="DeduplicationScope" type="string" />
+        <property name="FifoThroughputLimit" type="string" />
+
+    </transfer>
+    
+    <transfer name="SqsRedrivePolicy">
+        <property name="deadLetterTargetArn" type="string" />
+        <property name="maxReceiveCount" type="int" />
+    </transfer>
+
+    <transfer name="SqsDeleteQueueArgs">
+        <property name="QueueName" type="string" />
+    </transfer>
+
+    <transfer name="SqsPurgeQueueArgs">
+        <property name="QueueName" type="string" />
+    </transfer>
+
+    <transfer name="SqsSendMessageArgs">
+        <property name="QueueName" type="string" />
+        <property name="MessageBody" type="string" />
+        <property name="DelaySeconds" type="int" />
+        <property name="MessageDeduplicationId" type="string" />
+        <property name="MessageGroupId" type="string" />
+        <property name="MessageAttributes" type="string[]" />
+        <property name="MessageSystemAttributes" type="string[]" />
+    </transfer>
+    
+    <transfer name="SqsReceiveMessageArgs">
+        <property name="AttributeNames" type="string[]" />
+        <property name="MaxNumberOfMessages" type="int" />
+        <property name="MessageAttributeNames" type="string[]" />
+        <property name="QueueUrl" type="string" />
+        <property name="ReceiveRequestAttemptId" type="string" />
+        <property name="VisibilityTimeout" type="int" />
+        <property name="WaitTimeSeconds" type="int" />
+    </transfer>
+
+    <transfer name="SqsDeleteMessageArgs">
+        <property name="QueueUrl" type="string" />
+        <property name="ReceiptHandle" type="string" />
+    </transfer>
+
+    <transfer name="SqsChangeMessageVisibilityArgs">
+        <property name="QueueUrl" type="string" />
+        <property name="ReceiptHandle" type="string" />
+        <property name="VisibilityTimeout" type="string" />
+    </transfer>
+    
+    <transfer name="SqsGetQueueAttributesArgs">
+        <property name="AttributeNames" type="string[]" />
+        <property name="QueueUrl" type="string" />
+    </transfer>
+
+</transfers>

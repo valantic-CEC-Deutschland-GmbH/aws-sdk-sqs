@@ -31,7 +31,7 @@ composer req valantic-spryker/aws-sqs
 ```
 $config[AwsSqsConstants::AWS_SQS_CONFIG_PARAM_REGION] = 'us-east-1';
 $config[AwsSqsConstants::AWS_SQS_CONFIG_PARAM_VERSION] = 'latest';
-$config[AwsSqsConstants::AWS_SQS_CLIENT_CONFIG_KEY_ENDPOINT] = 'http://elasticmq:9324';
+$config[AwsSqsConstants::AWS_SQS_CONFIG_PARAM_ENDPOINT] = 'http://elasticmq:9324';
 ```
 
 Username and password, if required

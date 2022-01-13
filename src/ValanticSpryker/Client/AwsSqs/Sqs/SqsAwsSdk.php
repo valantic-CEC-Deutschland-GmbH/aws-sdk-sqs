@@ -35,7 +35,11 @@ class SqsAwsSdk implements SqsAwsSdkInterface
     public function createQueue(SqsCreateQueueArgsTransfer $sqsCreateQueueArgsTransfer): Result
     {
         return $this->sqsClient
-            ->createQueue($sqsCreateQueueArgsTransfer->toArray());
+            ->createQueue([
+                'QueueName' => $sqsCreateQueueArgsTransfer->getQueueName(),
+                'tags' => $sqsCreateQueueArgsTransfer->getTags(),
+                'Attributes' => $sqsCreateQueueArgsTransfer->getAttributes(),
+            ]);
     }
 
     /**
@@ -46,7 +50,9 @@ class SqsAwsSdk implements SqsAwsSdkInterface
     public function deleteQueue(SqsDeleteQueueArgsTransfer $sqsDeleteQueueArgsTransfer): void
     {
         $this->sqsClient
-            ->deleteQueue($sqsDeleteQueueArgsTransfer->toArray());
+            ->deleteQueue([
+                'QueueUrl' => $sqsDeleteQueueArgsTransfer->getQueueUrl(),
+            ]);
     }
 
     /**
@@ -57,7 +63,9 @@ class SqsAwsSdk implements SqsAwsSdkInterface
     public function purgeQueue(SqsPurgeQueueArgsTransfer $sqsPurgeQueueArgsTransfer): void
     {
         $this->sqsClient
-            ->purgeQueue($sqsPurgeQueueArgsTransfer->toArray());
+            ->purgeQueue([
+                'QueueUrl' => $sqsPurgeQueueArgsTransfer->getQueueUrl(),
+            ]);
     }
 
     /**
@@ -68,7 +76,15 @@ class SqsAwsSdk implements SqsAwsSdkInterface
     public function sendMessage(SqsSendMessageArgsTransfer $sqsSendMessageArgsTransfer): Result
     {
         return $this->sqsClient
-            ->sendMessage($sqsSendMessageArgsTransfer->toArray());
+            ->sendMessage([
+                'QueueUrl' => $sqsSendMessageArgsTransfer->getQueueUrl(),
+                'DelaySeconds' => $sqsSendMessageArgsTransfer->getDelaySeconds(),
+                'MessageAttributes' => $sqsSendMessageArgsTransfer->getMessageAttributes(),
+                'MessageBody' => $sqsSendMessageArgsTransfer->getMessageBody(),
+                'MessageDeduplicationId' => $sqsSendMessageArgsTransfer->getMessageDeduplicationId(),
+                'MessageGroupId' => $sqsSendMessageArgsTransfer->getMessageGroupId(),
+                'MessageSystemAttributes' => $sqsSendMessageArgsTransfer->getMessageSystemAttributes(),
+            ]);
     }
 
     /**
@@ -79,7 +95,15 @@ class SqsAwsSdk implements SqsAwsSdkInterface
     public function sendMessageAsync(SqsSendMessageArgsTransfer $sqsSendMessageArgsTransfer): PromiseInterface
     {
         return $this->sqsClient
-            ->sendMessageAsync($sqsSendMessageArgsTransfer->toArray());
+            ->sendMessageAsync([
+                'QueueUrl' => $sqsSendMessageArgsTransfer->getQueueUrl(),
+                'DelaySeconds' => $sqsSendMessageArgsTransfer->getDelaySeconds(),
+                'MessageAttributes' => $sqsSendMessageArgsTransfer->getMessageAttributes(),
+                'MessageBody' => $sqsSendMessageArgsTransfer->getMessageBody(),
+                'MessageDeduplicationId' => $sqsSendMessageArgsTransfer->getMessageDeduplicationId(),
+                'MessageGroupId' => $sqsSendMessageArgsTransfer->getMessageGroupId(),
+                'MessageSystemAttributes' => $sqsSendMessageArgsTransfer->getMessageSystemAttributes(),
+            ]);
     }
 
     /**
@@ -89,8 +113,24 @@ class SqsAwsSdk implements SqsAwsSdkInterface
      */
     public function sendMessageBatchAsync(SqsSendMessageBatchArgsTransfer $sqsSendMessageBatchArgsTransfer): PromiseInterface
     {
+        $entries = [];
+        foreach ($sqsSendMessageBatchArgsTransfer->getEntries() as $entry) {
+            $entries[] = [
+                'DelaySeconds' => $entry->getDelaySeconds(),
+                'Id' => $entry->getId(),
+                'MessageAttributes' => $entry->getMessageAttributes(),
+                'MessageBody' => $entry->getMessageBody(),
+                'MessageDeduplicationId' => $entry->getMessageDeduplicationId(),
+                'MessageGroupId' => $entry->getMessageGroupId(),
+                'MessageSystemAttributes' => $entry->getMessageSystemAttributes(),
+            ];
+        }
+
         return $this->sqsClient
-            ->sendMessageBatchAsync($sqsSendMessageBatchArgsTransfer->toArray());
+            ->sendMessageBatchAsync([
+                'QueueUrl' => $sqsSendMessageBatchArgsTransfer->getQueueUrl(),
+                'Entries' => $entries,
+            ]);
     }
 
     /**
@@ -101,7 +141,15 @@ class SqsAwsSdk implements SqsAwsSdkInterface
     public function receiveMessage(SqsReceiveMessageArgsTransfer $sqsReceiveMessageArgsTransfer): Result
     {
         return $this->sqsClient
-            ->receiveMessage($sqsReceiveMessageArgsTransfer->toArray());
+            ->receiveMessage([
+                'QueueUrl' => $sqsReceiveMessageArgsTransfer->getQueueUrl(),
+                'AttributeNames' => $sqsReceiveMessageArgsTransfer->getAttributeNames(),
+                'MaxNumberOfMessages' => $sqsReceiveMessageArgsTransfer->getMaxNumberOfMessages(),
+                'MessageAttributeNames' => $sqsReceiveMessageArgsTransfer->getMessageAttributeNames(),
+                'ReceiveRequestAttemptId' => $sqsReceiveMessageArgsTransfer->getReceiveRequestAttemptId(),
+                'VisibilityTimeout' => $sqsReceiveMessageArgsTransfer->getVisibilityTimeout(),
+                'WaitTimeSeconds' => $sqsReceiveMessageArgsTransfer->getWaitTimeSeconds(),
+            ]);
     }
 
     /**
@@ -112,7 +160,10 @@ class SqsAwsSdk implements SqsAwsSdkInterface
     public function deleteMessage(SqsDeleteMessageArgsTransfer $sqsDeleteMessageArgsTransfer): void
     {
         $this->sqsClient
-            ->deleteMessage($sqsDeleteMessageArgsTransfer->toArray());
+            ->deleteMessage([
+                'QueueUrl' => $sqsDeleteMessageArgsTransfer->getQueueUrl(),
+                'ReceiptHandle' => $sqsDeleteMessageArgsTransfer->getReceiptHandle(),
+            ]);
     }
 
     /**
@@ -123,7 +174,11 @@ class SqsAwsSdk implements SqsAwsSdkInterface
     public function changeMessageVisibility(SqsChangeMessageVisibilityArgsTransfer $sqsChangeMessageVisibilityArgsTransfer): void
     {
         $this->sqsClient
-            ->changeMessageVisibility($sqsChangeMessageVisibilityArgsTransfer->toArray());
+            ->changeMessageVisibility([
+                'QueueUrl' => $sqsChangeMessageVisibilityArgsTransfer->getQueueUrl(),
+                'ReceiptHandle' => $sqsChangeMessageVisibilityArgsTransfer->getReceiptHandle(),
+                'VisibilityTimeout' => $sqsChangeMessageVisibilityArgsTransfer->getVisibilityTimeout(),
+            ]);
     }
 
     /**
@@ -134,7 +189,11 @@ class SqsAwsSdk implements SqsAwsSdkInterface
     public function changeMessageVisibilityAsync(SqsChangeMessageVisibilityArgsTransfer $sqsChangeMessageVisibilityArgsTransfer): void
     {
         $this->sqsClient
-            ->changeMessageVisibilityAsync($sqsChangeMessageVisibilityArgsTransfer->toArray());
+            ->changeMessageVisibilityAsync([
+                'QueueUrl' => $sqsChangeMessageVisibilityArgsTransfer->getQueueUrl(),
+                'ReceiptHandle' => $sqsChangeMessageVisibilityArgsTransfer->getReceiptHandle(),
+                'VisibilityTimeout' => $sqsChangeMessageVisibilityArgsTransfer->getVisibilityTimeout(),
+            ]);
     }
 
     /**
@@ -145,6 +204,9 @@ class SqsAwsSdk implements SqsAwsSdkInterface
     public function getQueueAttributes(SqsGetQueueAttributesArgsTransfer $sqsGetQueueAttributesArgsTransfer): Result
     {
         return $this->sqsClient
-            ->getQueueAttributes($sqsGetQueueAttributesArgsTransfer->toArray());
+            ->getQueueAttributes([
+                'QueueUrl' => $sqsGetQueueAttributesArgsTransfer->getQueueUrl(),
+                'AttributeNames' => $sqsGetQueueAttributesArgsTransfer->getAttributeNames(),
+            ]);
     }
 }

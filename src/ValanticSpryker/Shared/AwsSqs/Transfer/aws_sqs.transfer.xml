@@ -5,24 +5,8 @@
 
     <transfer name="SqsCreateQueueArgs">
         <property name="QueueName" type="string" />
-        <property name="Attributes" type="SqsCreateQueueArgsAttributes" />
+        <property name="Attributes" type="string[]" />
         <property name="tags" type="string[]" />
-    </transfer>
-    
-    <transfer name="SqsCreateQueueArgsAttributes">
-        <property name="DelaySeconds" type="int" />
-        <property name="MaximumMessageSize" type="int" />
-        <property name="MessageRetentionPeriod" type="int" />
-        <property name="ReceiveMessageWaitTimeSeconds" type="int" />
-        <property name="VisibilityTimeout" type="int" />
-        <property name="RedrivePolicy" type="SqsRedrivePolicy" />
-        <property name="KmsMasterKeyId" type="string" />
-        <property name="KmsDataKeyReusePeriodSeconds" type="int" />
-        <property name="SqsManagedSseEnabled" type="bool" />
-        <property name="FifoQueue" type="bool" />
-        <property name="ContentBasedDeduplication" type="bool" />
-        <property name="DeduplicationScope" type="string" />
-        <property name="FifoThroughputLimit" type="string" />
     </transfer>
     
     <transfer name="SqsRedrivePolicy">
@@ -31,11 +15,11 @@
     </transfer>
 
     <transfer name="SqsDeleteQueueArgs">
-        <property name="QueueName" type="string" />
+        <property name="QueueUrl" type="string" />
     </transfer>
 
     <transfer name="SqsPurgeQueueArgs">
-        <property name="QueueName" type="string" />
+        <property name="QueueUrl" type="string" />
     </transfer>
 
     <transfer name="SqsSendMessageArgs">

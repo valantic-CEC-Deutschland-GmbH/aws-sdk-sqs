@@ -75,16 +75,10 @@ class SqsAwsSdk implements SqsAwsSdkInterface
      */
     public function sendMessage(SqsSendMessageArgsTransfer $sqsSendMessageArgsTransfer): Result
     {
+        $args = $this->createSendMessageArgs($sqsSendMessageArgsTransfer);
+
         return $this->sqsClient
-            ->sendMessage([
-                'QueueUrl' => $sqsSendMessageArgsTransfer->getQueueUrl(),
-                'DelaySeconds' => $sqsSendMessageArgsTransfer->getDelaySeconds(),
-                'MessageAttributes' => $sqsSendMessageArgsTransfer->getMessageAttributes(),
-                'MessageBody' => $sqsSendMessageArgsTransfer->getMessageBody(),
-                'MessageDeduplicationId' => $sqsSendMessageArgsTransfer->getMessageDeduplicationId(),
-                'MessageGroupId' => $sqsSendMessageArgsTransfer->getMessageGroupId(),
-                'MessageSystemAttributes' => $sqsSendMessageArgsTransfer->getMessageSystemAttributes(),
-            ]);
+            ->sendMessage($args);
     }
 
     /**
@@ -94,16 +88,10 @@ class SqsAwsSdk implements SqsAwsSdkInterface
      */
     public function sendMessageAsync(SqsSendMessageArgsTransfer $sqsSendMessageArgsTransfer): PromiseInterface
     {
+        $args = $this->createSendMessageArgs($sqsSendMessageArgsTransfer);
+
         return $this->sqsClient
-            ->sendMessageAsync([
-                'QueueUrl' => $sqsSendMessageArgsTransfer->getQueueUrl(),
-                'DelaySeconds' => $sqsSendMessageArgsTransfer->getDelaySeconds(),
-                'MessageAttributes' => $sqsSendMessageArgsTransfer->getMessageAttributes(),
-                'MessageBody' => $sqsSendMessageArgsTransfer->getMessageBody(),
-                'MessageDeduplicationId' => $sqsSendMessageArgsTransfer->getMessageDeduplicationId(),
-                'MessageGroupId' => $sqsSendMessageArgsTransfer->getMessageGroupId(),
-                'MessageSystemAttributes' => $sqsSendMessageArgsTransfer->getMessageSystemAttributes(),
-            ]);
+            ->sendMessageAsync($args);
     }
 
     /**
@@ -208,5 +196,31 @@ class SqsAwsSdk implements SqsAwsSdkInterface
                 'QueueUrl' => $sqsGetQueueAttributesArgsTransfer->getQueueUrl(),
                 'AttributeNames' => $sqsGetQueueAttributesArgsTransfer->getAttributeNames(),
             ]);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\SqsSendMessageArgsTransfer $sqsSendMessageArgsTransfer
+     *
+     * @return array
+     */
+    private function createSendMessageArgs(SqsSendMessageArgsTransfer $sqsSendMessageArgsTransfer): array
+    {
+        $args = [];
+        if ($sqsSendMessageArgsTransfer->getDelaySeconds() !== null) {
+            $args['DelaySeconds'] = $sqsSendMessageArgsTransfer->getDelaySeconds();
+        }
+        if ($sqsSendMessageArgsTransfer->getMessageDeduplicationId() !== null) {
+            $args['MessageDeduplicationId'] = $sqsSendMessageArgsTransfer->getMessageDeduplicationId();
+        }
+        if ($sqsSendMessageArgsTransfer->getMessageGroupId() !== null) {
+            $args['MessageGroupId'] = $sqsSendMessageArgsTransfer->getMessageGroupId();
+        }
+
+        return array_merge([
+                'QueueUrl' => $sqsSendMessageArgsTransfer->getQueueUrl(),
+                'MessageBody' => $sqsSendMessageArgsTransfer->getMessageBody(),
+                'MessageAttributes' => $sqsSendMessageArgsTransfer->getMessageAttributes(),
+                'MessageSystemAttributes' => $sqsSendMessageArgsTransfer->getMessageSystemAttributes(),
+            ], $args);
     }
 }

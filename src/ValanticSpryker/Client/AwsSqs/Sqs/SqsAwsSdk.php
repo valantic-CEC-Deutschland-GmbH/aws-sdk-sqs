@@ -128,16 +128,26 @@ class SqsAwsSdk implements SqsAwsSdkInterface
      */
     public function receiveMessage(SqsReceiveMessageArgsTransfer $sqsReceiveMessageArgsTransfer): Result
     {
+        $args = [];
+        if ($sqsReceiveMessageArgsTransfer->getMaxNumberOfMessages() !== null) {
+            $args['MaxNumberOfMessages'] = $sqsReceiveMessageArgsTransfer->getMaxNumberOfMessages();
+        }
+        if ($sqsReceiveMessageArgsTransfer->getReceiveRequestAttemptId() !== null) {
+            $args['ReceiveRequestAttemptId'] = $sqsReceiveMessageArgsTransfer->getReceiveRequestAttemptId();
+        }
+        if ($sqsReceiveMessageArgsTransfer->getVisibilityTimeout() !== null) {
+            $args['VisibilityTimeout'] = $sqsReceiveMessageArgsTransfer->getVisibilityTimeout();
+        }
+        if ($sqsReceiveMessageArgsTransfer->getWaitTimeSeconds() !== null) {
+            $args['WaitTimeSeconds'] = $sqsReceiveMessageArgsTransfer->getWaitTimeSeconds();
+        }
+
         return $this->sqsClient
-            ->receiveMessage([
+            ->receiveMessage(array_merge([
                 'QueueUrl' => $sqsReceiveMessageArgsTransfer->getQueueUrl(),
                 'AttributeNames' => $sqsReceiveMessageArgsTransfer->getAttributeNames(),
-                'MaxNumberOfMessages' => $sqsReceiveMessageArgsTransfer->getMaxNumberOfMessages(),
                 'MessageAttributeNames' => $sqsReceiveMessageArgsTransfer->getMessageAttributeNames(),
-                'ReceiveRequestAttemptId' => $sqsReceiveMessageArgsTransfer->getReceiveRequestAttemptId(),
-                'VisibilityTimeout' => $sqsReceiveMessageArgsTransfer->getVisibilityTimeout(),
-                'WaitTimeSeconds' => $sqsReceiveMessageArgsTransfer->getWaitTimeSeconds(),
-            ]);
+            ], $args));
     }
 
     /**

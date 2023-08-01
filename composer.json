@@ -56,7 +56,8 @@
   "keywords": [
     "aws",
     "sqs",
-    "queue"
+    "queue",
+    "spryker-eco"
   ],
   "include-path": [
     "src/"

@@ -3,7 +3,7 @@
   "type": "library",
   "description": "Container for AWS SDK SQS operations",
   "homepage": "https://www.valantic.com",
-  "license": "MIT",
+  "license": "proprietary",
   "require": {
     "php": ">=7.4",
     "aws/aws-sdk-php": "^3.205",

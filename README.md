@@ -4,7 +4,7 @@ Container for AWS SDK SQS operations
 
 ### Install package
 ```
-composer req valantic-cec/aws-sqs
+composer req valantic-spryker/aws-sqs
 ```
 
 ### Update your shared config

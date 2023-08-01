@@ -57,7 +57,7 @@
     "aws",
     "sqs",
     "queue",
-    "spryker-eco"
+    "spryker"
   ],
   "include-path": [
     "src/"

@@ -1,5 +1,5 @@
 {
-  "name": "valantic-spryker/aws-sqs",
+  "name": "valantic-spryker-eco/aws-sqs",
   "type": "library",
   "description": "Container for AWS SDK SQS operations",
   "homepage": "https://www.valantic.com",
